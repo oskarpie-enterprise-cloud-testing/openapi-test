@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: A simple API with one route for demonstration
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+paths:
+  /users:
+    get:
+      summary: Get all users
+      description: Retrieve a list of all users in the system
+      operationId: getUsers
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of users to return
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "John Doe"
+                        email:
+                          type: string
+                          example: "john@example.com"
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
